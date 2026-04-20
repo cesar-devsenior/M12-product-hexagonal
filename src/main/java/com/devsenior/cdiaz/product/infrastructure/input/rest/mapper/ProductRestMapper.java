@@ -19,10 +19,12 @@ public class ProductRestMapper {
         return new ProductResponse(product.getId(), product.getName(), product.getPrice());
     }
 
-    public ProductEntity toEntity(ProductRequest request) {
-        return new ProductEntity(request.name(), request.price());
+    // Transforma el resultado del Dominio a un formato para JPA
+    public ProductEntity toEntity(Product product) {
+        return new ProductEntity(product.getName(), product.getPrice());
     }
 
+    // Transforma el resultado de JPA a un formato para el Dominio
     public Product toDomain(ProductEntity entity) {
         return new Product(entity.getId(), entity.getName(), entity.getPrice());
     }

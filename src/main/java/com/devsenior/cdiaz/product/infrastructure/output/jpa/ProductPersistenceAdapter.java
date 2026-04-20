@@ -6,34 +6,35 @@ import org.springframework.stereotype.Component;
 
 import com.devsenior.cdiaz.product.domain.model.Product;
 import com.devsenior.cdiaz.product.domain.ports.out.ProductRepositoryPort;
+import com.devsenior.cdiaz.product.infrastructure.input.rest.mapper.ProductRestMapper;
 
 @Component
 public class ProductPersistenceAdapter implements ProductRepositoryPort {
 
     private final SpringDataProductRepository repository;
+    private final ProductRestMapper mapper;
 
-    public ProductPersistenceAdapter(SpringDataProductRepository repository) {
+    public ProductPersistenceAdapter(SpringDataProductRepository repository, ProductRestMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public Product save(Product product) {
         // 1. Mapear Dominio -> Entidad JPA
-        ProductEntity entity = new ProductEntity();
-        entity.setName(product.getName());
-        entity.setPrice(product.getPrice());
+        var entity = mapper.toEntity(product);
 
         // 2. Guardar en BD
-        ProductEntity savedEntity = repository.save(entity);
+        var savedEntity = repository.save(entity);
 
         // 3. Mapear Entidad JPA -> Dominio
-        return new Product(savedEntity.getId(), savedEntity.getName(), savedEntity.getPrice());
+        return mapper.toDomain(savedEntity);
     }
 
     @Override
     public Optional<Product> findById(Long id) {
         return repository.findById(id)
-                .map(entity -> new Product(entity.getId(), entity.getName(), entity.getPrice()));
+                .map(mapper::toDomain);
     }
 
 }
