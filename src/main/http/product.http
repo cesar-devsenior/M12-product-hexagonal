@@ -1,0 +1,13 @@
+@host=http://localhost:8080
+
+###
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+    "name": "Product 2",
+    "price": 29.99
+}
+
+###
+GET {{host}}/api/products/1
