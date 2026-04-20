@@ -1,5 +1,7 @@
 package com.devsenior.cdiaz.product.application.service;
 
+import java.util.List;
+
 import com.devsenior.cdiaz.product.application.usecase.CreateProductUseCase;
 import com.devsenior.cdiaz.product.application.usecase.GetProductUseCase;
 import com.devsenior.cdiaz.product.domain.exception.ProductNotFoundException;
@@ -23,6 +25,11 @@ public class ProductService implements CreateProductUseCase, GetProductUseCase {
     @Override
     public Product createProduct(Product product) {
         return productRepositoryPort.save(product);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepositoryPort.findAll();
     }
 
 }

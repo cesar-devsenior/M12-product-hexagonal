@@ -19,8 +19,9 @@ public class ProductRestMapper {
         return new ProductResponse(product.getId(), product.getName(), product.getPrice());
     }
 
-    public ProductEntity toEntity(ProductRequest request) {
-        return new ProductEntity(request.name(), request.price());
+    // Transforma lo que entra desde la web al lenguaje del Dominio
+    public ProductEntity toEntity(Product product) {
+        return new ProductEntity(product.getId(), product.getName(), product.getPrice());
     }
 
     public Product toDomain(ProductEntity entity) {

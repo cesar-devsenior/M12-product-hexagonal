@@ -1,5 +1,7 @@
 package com.devsenior.cdiaz.product.infrastructure.input.rest;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,11 +49,20 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> getMethodName(@PathVariable Long id) {
+    public ResponseEntity<ProductResponse> getById(@PathVariable Long id) {
         var product = getProductUseCase.getProductById(id);
-        
+
         var response = productRestMapper.toDto(product);
 
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getAll() {
+        var response = getProductUseCase.getAllProducts().stream()
+            .map(productRestMapper::toDto)
+            .toList();
+        
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

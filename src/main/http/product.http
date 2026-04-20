@@ -5,9 +5,12 @@ POST {{host}}/api/products
 Content-Type: application/json
 
 {
-    "name": "Product 2",
-    "price": 29.99
+    "name": "Product 1",
+    "price": 19.99
 }
+
+###
+GET {{host}}/api/products
 
 ###
 GET {{host}}/api/products/1
