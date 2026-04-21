@@ -1,4 +1,4 @@
-package com.devsenior.cdiaz.product.infrastructure.output.jpa;
+package com.devsenior.cdiaz.product.infrastructure.output.adapter;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.devsenior.cdiaz.product.domain.model.Product;
 import com.devsenior.cdiaz.product.domain.ports.out.ProductRepositoryPort;
 import com.devsenior.cdiaz.product.infrastructure.input.rest.mapper.ProductRestMapper;
+import com.devsenior.cdiaz.product.infrastructure.output.jpa.SpringDataProductRepository;
 
 @Component
 public class ProductPersistenceAdapter implements ProductRepositoryPort {
