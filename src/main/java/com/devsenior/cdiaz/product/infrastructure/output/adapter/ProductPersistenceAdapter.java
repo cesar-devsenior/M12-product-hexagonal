@@ -6,16 +6,16 @@ import org.springframework.stereotype.Component;
 
 import com.devsenior.cdiaz.product.domain.model.Product;
 import com.devsenior.cdiaz.product.domain.ports.out.ProductRepositoryPort;
-import com.devsenior.cdiaz.product.infrastructure.input.rest.mapper.ProductRestMapper;
 import com.devsenior.cdiaz.product.infrastructure.output.jpa.SpringDataProductRepository;
+import com.devsenior.cdiaz.product.infrastructure.output.jpa.mapper.ProductJpaMapper;
 
 @Component
 public class ProductPersistenceAdapter implements ProductRepositoryPort {
 
     private final SpringDataProductRepository repository;
-    private final ProductRestMapper mapper;
+    private final ProductJpaMapper mapper;
 
-    public ProductPersistenceAdapter(SpringDataProductRepository repository, ProductRestMapper mapper) {
+    public ProductPersistenceAdapter(SpringDataProductRepository repository, ProductJpaMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
